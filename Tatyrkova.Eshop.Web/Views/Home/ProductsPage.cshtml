@@ -1,5 +1,6 @@
 ﻿
-@model IndexViewModel
+@model ProductsPageViewModel
+
 @{
     ViewData["Title"] = "Products page";
 
@@ -18,13 +19,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Mlecne vyrobky <span class="sr-only">(current)</span></a>
+                <form method="post">
+                    <a class="nav-link" asp-controller="ProductsPage" asp-action="Category" asp-route-ID="1">Mlecne vyrobky</a>
+                    <input type="hidden" name="categoryName" value="Mlecne vyrobky" />
+                </form>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Mrazene potraviny <span class="sr-only">(current)</span></a>
+                <form method="post">
+                    <a class="nav-link" asp-controller="ProductsPage" asp-action="Category" asp-route-ID="Mrazene potraviny">Mrazene potraviny</a>
+                    <input type="hidden" name="categoryName" value="Mrazene potraviny" />
+                </form>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Napoje <span class="sr-only">(current)</span></a>
+                <form method="post">
+                    <a class="nav-link" asp-controller="ProductsPage" asp-action="Category" asp-route-ID="Napoje">Napoje</a>
+                    <input type="hidden" name="categoryName" value="Napoje" />
+                </form>
             </li>
         </ul>
     </div>
@@ -34,21 +44,14 @@
 <p>Use this page for products.</p>
 
 
-
-
-
 @{
     if (Model != null && Model.Products != null && Model.Products.Count > 0)
     {
-        for (int i = 0; i < Model.Products.Count; ++i)
-        {
-            if (Model.Products[i].Category == "Mlecne vyrobky")
-            {
-
-                <section class="py-5">
-                    <div class="container px-4 px-lg-5 mt-5">
-                        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    @{ for (int i = 0; i < Model.Products.Count; ++i)
+                        {
 
                             <div class="col mb-5">
                                 <div class="card h-100">
@@ -70,11 +73,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </section>
-            }
-        }
 
+
+                        }
+                    }
+                </div>
+            </div>
+        </section>
     }
 }
+

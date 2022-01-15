@@ -40,7 +40,7 @@ namespace Tatyrkova.Eshop.Web.Controllers
         {
             ProductsPageViewModel productVM = new ProductsPageViewModel();
             productVM.Products = eshopDbContext.Products.ToList();
-            return View();
+            return View(productVM);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

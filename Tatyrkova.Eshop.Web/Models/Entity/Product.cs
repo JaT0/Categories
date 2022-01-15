@@ -32,5 +32,7 @@ namespace Tatyrkova.Eshop.Web.Models.Entity
 
         [StringLength(50)]
         public string Category { get; set; }
+
+
     }
 }

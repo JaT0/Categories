@@ -10,5 +10,9 @@ namespace Tatyrkova.Eshop.Web.Models.ViewModels
     {
 
         public IList<Product> Products { get; set; }
-    }
+
+        
+
+    } 
+        
 }
