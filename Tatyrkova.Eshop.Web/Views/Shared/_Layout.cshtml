@@ -25,20 +25,20 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ProductsPage">Products</a>
-                        </li>
-                        @*<li class="nav-item dropdown">
+                        </li>*@
+                        <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Category
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Mrazene produkty</a>
-                <a class="dropdown-item" href="#">Mlecne vyrobky</a>
+                <a class="nav-link" asp-controller="ProductsPage" asp-action="Category" asp-route-categoryName="Mlecne vyrobky">Mlecne vyrobky</a>
+                <a class="nav-link" asp-controller="ProductsPage" asp-action="Category" asp-route-categoryName="Mrazene potraviny">Mrazene potraviny</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Napoje</a>
+                <a class="nav-link" asp-controller="ProductsPage" asp-action="Category" asp-route-categoryName="Napoje">Napoje</a>
             </div>
-        </li>*@
+        </li>
                         @{
                             @if (User.Identity.IsAuthenticated == true && (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.Manager.ToString())))
                             {

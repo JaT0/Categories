@@ -26,4 +26,26 @@
     <Folder Include="Areas\Customer\Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Areas\Admin\Views\OrderItems\Create.cshtml" />
+    <None Include="Areas\Admin\Views\OrderItems\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\OrderItems\Details.cshtml" />
+    <None Include="Areas\Admin\Views\OrderItems\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\OrderItems\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Orders\Create.cshtml" />
+    <None Include="Areas\Admin\Views\Orders\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\Orders\Details.cshtml" />
+    <None Include="Areas\Admin\Views\Orders\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\Orders\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Product\Create.cshtml" />
+    <None Include="Areas\Admin\Views\Product\CreateEditForm.cshtml" />
+    <None Include="Areas\Admin\Views\Product\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\Product\Select.cshtml" />
+    <None Include="Areas\Admin\Views\Users\Create.cshtml" />
+    <None Include="Areas\Admin\Views\Users\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\Users\Details.cshtml" />
+    <None Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\Users\Index.cshtml" />
+  </ItemGroup>
+
 </Project>

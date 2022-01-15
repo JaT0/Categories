@@ -1,11 +1,14 @@
-﻿@model Product
-@using Tatyrkova.Eshop.Web.Areas.Admin.Controllers
+﻿@using Tatyrkova.Eshop.Web.Areas.Admin.Controllers
+@model Product
 @{
-    ViewData["Title"] = "Products";
+    ViewData["Title"] = "Edit Product";
 }
 <h1>@ViewData["Title"]</h1>
 
-@{
+<p>Use this page to edit product item.</p>
+
+@{ 
     ViewBag.Action = nameof(ProductController.Edit);
 }
+
 <partial name="CreateEditForm" model="Model">

@@ -19,22 +19,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <form method="post">
-                    <a class="nav-link" asp-controller="ProductsPage" asp-action="Category" asp-route-ID="1">Mlecne vyrobky</a>
-                    <input type="hidden" name="categoryName" value="Mlecne vyrobky" />
-                </form>
+                    <a class="nav-link" asp-controller="ProductsPage" asp-action="Category" asp-route-categoryName="Mlecne vyrobky">Mlecne vyrobky</a>
             </li>
             <li class="nav-item active">
-                <form method="post">
-                    <a class="nav-link" asp-controller="ProductsPage" asp-action="Category" asp-route-ID="Mrazene potraviny">Mrazene potraviny</a>
-                    <input type="hidden" name="categoryName" value="Mrazene potraviny" />
-                </form>
+                    <a class="nav-link" asp-controller="ProductsPage" asp-action="Category" asp-route-categoryName="Mrazene potraviny">Mrazene potraviny</a>
             </li>
             <li class="nav-item active">
-                <form method="post">
-                    <a class="nav-link" asp-controller="ProductsPage" asp-action="Category" asp-route-ID="Napoje">Napoje</a>
-                    <input type="hidden" name="categoryName" value="Napoje" />
-                </form>
+                    <a class="nav-link" asp-controller="ProductsPage" asp-action="Category" asp-route-categoryName="Napoje">Napoje</a>
             </li>
         </ul>
     </div>

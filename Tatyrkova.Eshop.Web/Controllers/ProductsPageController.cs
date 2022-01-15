@@ -29,15 +29,15 @@ namespace Tatyrkova.Eshop.Web.Controllers
 
         }
 
-        public IActionResult Category(int categoryName)
+        public IActionResult Category(string categoryName)
         {
             // DbSet<Product> products = eshopDbContext.Products;
 
             ProductsPageViewModel productsVM = new ProductsPageViewModel();
 
-            //IList<Product> product = (IList<Product>)eshopDbContext.Products
-            //    .Where(product => product.Category == categoryName).ToList();
-            //productsVM.Products = product;
+            IList<Product> product = (IList<Product>)eshopDbContext.Products
+                .Where(product => product.Category == categoryName).ToList();
+            productsVM.Products = product;
             return View(productsVM);
         }
     }

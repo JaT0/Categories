@@ -1,9 +1,10 @@
 ﻿using Tatyrkova.Eshop.Web.Models.Database;
 using Tatyrkova.Eshop.Web.Models.Entity;
-using Tatyrkova.Eshop.Web.Models.Implementation;
+using Tatyrkova.Eshop.Web.Models.Identity;
+using Tatyrkova.Eshop.Web.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,107 +13,93 @@ using System.Threading.Tasks;
 namespace Tatyrkova.Eshop.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = nameof(Roles.Admin) + ", " + nameof(Roles.Manager))]
     public class ProductController : Controller
     {
-        readonly EshopDbContext eshopDbContext;
-        IWebHostEnvironment env;
 
-        public ProductController(EshopDbContext eshopDB, IWebHostEnvironment env)
+        readonly EshopDbContext eshopDbContext;
+        public ProductController(EshopDbContext eshopDb)
         {
-            eshopDbContext = eshopDB;
-            this.env = env;
+            eshopDbContext = eshopDb;
         }
         public IActionResult Select()
         {
-            IList<Product> products = eshopDbContext.Products.ToList();
+            IndexViewModel indexVM = new IndexViewModel();
+            indexVM.Products = eshopDbContext.Products.ToList();
 
-            return View(products);
+            return View(indexVM);
         }
 
         public IActionResult Create()
         {
             return View();
         }
-
         [HttpPost]
-        public async Task<IActionResult> Create(Product product)
+        public IActionResult Create(Product productItem)
         {
-            if (product != null && product.Image != null)
+            if (String.IsNullOrWhiteSpace(productItem.Name) == false
+                && productItem.Price > 0)
             {
-                FileUpload fileUpload = new FileUpload(env.WebRootPath, "img/Products", "image");
-                product.ImageSource = await fileUpload.FileUploadAsync(product.Image);
+               
+                eshopDbContext.Products.Add(productItem);
 
-                if (String.IsNullOrWhiteSpace(product.ImageSource) == false)
-                {
-                    eshopDbContext.Products.Add(product);
+                eshopDbContext.SaveChanges();
 
-                    await eshopDbContext.SaveChangesAsync();
-
-                    return RedirectToAction(nameof(ProductController.Select));
-                }
+                return RedirectToAction(nameof(ProductController.Select));
+            }else
+            {
+                return View(productItem);
             }
-
-            return View(product);
-
         }
 
         public IActionResult Edit(int ID)
         {
-            Product productFromDB = eshopDbContext.Products.FirstOrDefault(cI => cI.ID == ID);
-
-            if (productFromDB != null)
+            Product productItem = eshopDbContext.Products.Where(pItem => pItem.ID == ID).FirstOrDefault();
+            if (productItem != null)
             {
-                return View(productFromDB);
+                return View(productItem);
             }
             else
             {
                 return NotFound();
             }
         }
-
         [HttpPost]
-        public async Task<IActionResult> Edit(Product product)
+        public IActionResult Edit(Product productItem)
         {
-
-            Product productFromDB = eshopDbContext.Products.FirstOrDefault(cI => cI.ID == product.ID);
-
-            if (productFromDB != null)
+            if (String.IsNullOrWhiteSpace(productItem.Name) == false
+               &&  productItem.Price > 0 && String.IsNullOrWhiteSpace(productItem.ImageSource) == false)
             {
-                if (product != null && product.Image != null)
+
+
+                Product proItem = eshopDbContext.Products.Where(pItem => pItem.ID == productItem.ID).FirstOrDefault();
+                if (proItem != null)
                 {
-                    FileUpload fileUpload = new FileUpload(env.WebRootPath, "img/Products", "image");
-                    product.ImageSource = await fileUpload.FileUploadAsync(product.Image);
-
-                    if (String.IsNullOrWhiteSpace(product.ImageSource) == false)
-                    {
-                        productFromDB.ImageSource = product.ImageSource;
-
-                    }
+                    proItem.Name = productItem.Name;
+                    proItem.ImageSource = productItem.ImageSource;
+                    proItem.Price = productItem.Price;
+                    eshopDbContext.SaveChanges();
+                    return RedirectToAction(nameof(ProductController.Select));
                 }
-                productFromDB.ImageAlt = product.ImageAlt;
-                await eshopDbContext.SaveChangesAsync();
-
-                return RedirectToAction(nameof(ProductController.Select));
-            }
-            else
+                
+                
+                    return NotFound();
+                
+            }else
             {
-                return NotFound();
+                return View(productItem);
             }
         }
 
-        public async Task<IActionResult> Delete(int ID)
+            public IActionResult Delete(int ID)
         {
-            DbSet<Product> products = eshopDbContext.Products;
-
-            Product product = products.Where(carouselItem => carouselItem.ID == ID).FirstOrDefault();
-
-            if (product != null)
+            Product productItem = eshopDbContext.Products.Where(pItem => pItem.ID == ID).FirstOrDefault();
+            if(productItem != null)
             {
-                products.Remove(product);
+                eshopDbContext.Products.Remove(productItem);
 
-                await eshopDbContext.SaveChangesAsync();
+                eshopDbContext.SaveChanges();
             }
-
             return RedirectToAction(nameof(ProductController.Select));
         }
     }
