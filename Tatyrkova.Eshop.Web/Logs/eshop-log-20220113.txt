@@ -1,0 +1,1427 @@
+2022-01-13T16:38:40.4292074+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T16:38:40.8837056+01:00  [INF] Executed DbCommand ("18"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T16:38:41.1504090+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T16:39:30.2597147+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T16:39:46.7509483+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T16:39:47.0965652+01:00  [INF] Executed DbCommand ("14"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Tatyrkova.Eshop' AND TABLE_NAME='__EFMigrationsHistory';" (0723d8ff)
+2022-01-13T16:39:47.1078758+01:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Tatyrkova.Eshop' AND TABLE_NAME='__EFMigrationsHistory';" (0723d8ff)
+2022-01-13T16:39:47.1161826+01:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;" (0723d8ff)
+2022-01-13T16:39:47.1379201+01:00  [INF] Applying migration '"20220113153930_MySql_1.0.2"'. (0e2ac64d)
+2022-01-13T16:39:47.2512680+01:00  [INF] Executed DbCommand ("30"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE `Roles` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `Name` varchar(256) CHARACTER SET utf8mb4 NULL,
+    `NormalizedName` varchar(256) CHARACTER SET utf8mb4 NULL,
+    `ConcurrencyStamp` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_Roles` PRIMARY KEY (`Id`)
+) CHARACTER SET utf8mb4;" (0723d8ff)
+2022-01-13T16:39:47.2766698+01:00  [INF] Executed DbCommand ("25"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE `Users` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `FirstName` longtext CHARACTER SET utf8mb4 NULL,
+    `LastName` longtext CHARACTER SET utf8mb4 NULL,
+    `UserName` varchar(256) CHARACTER SET utf8mb4 NULL,
+    `NormalizedUserName` varchar(256) CHARACTER SET utf8mb4 NULL,
+    `Email` varchar(256) CHARACTER SET utf8mb4 NULL,
+    `NormalizedEmail` varchar(256) CHARACTER SET utf8mb4 NULL,
+    `EmailConfirmed` tinyint(1) NOT NULL,
+    `PasswordHash` longtext CHARACTER SET utf8mb4 NULL,
+    `SecurityStamp` longtext CHARACTER SET utf8mb4 NULL,
+    `ConcurrencyStamp` longtext CHARACTER SET utf8mb4 NULL,
+    `PhoneNumber` longtext CHARACTER SET utf8mb4 NULL,
+    `PhoneNumberConfirmed` tinyint(1) NOT NULL,
+    `TwoFactorEnabled` tinyint(1) NOT NULL,
+    `LockoutEnd` datetime(6) NULL,
+    `LockoutEnabled` tinyint(1) NOT NULL,
+    `AccessFailedCount` int NOT NULL,
+    CONSTRAINT `PK_Users` PRIMARY KEY (`Id`)
+) CHARACTER SET utf8mb4;" (0723d8ff)
+2022-01-13T16:39:47.3081123+01:00  [INF] Executed DbCommand ("31"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE `RoleClaims` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `RoleId` int NOT NULL,
+    `ClaimType` longtext CHARACTER SET utf8mb4 NULL,
+    `ClaimValue` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_RoleClaims` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_RoleClaims_Roles_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `Roles` (`Id`) ON DELETE CASCADE
+) CHARACTER SET utf8mb4;" (0723d8ff)
+2022-01-13T16:39:47.3422866+01:00  [INF] Executed DbCommand ("34"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE `Order` (
+    `ID` int NOT NULL AUTO_INCREMENT,
+    `DateTimeCreated` datetime(6) NOT NULL DEFAULT NOW(6),
+    `OrderNumber` varchar(25) CHARACTER SET utf8mb4 NOT NULL,
+    `TotalPrice` double NOT NULL,
+    `UserId` int NOT NULL,
+    CONSTRAINT `PK_Order` PRIMARY KEY (`ID`),
+    CONSTRAINT `FK_Order_Users_UserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`) ON DELETE CASCADE
+) CHARACTER SET utf8mb4;" (0723d8ff)
+2022-01-13T16:39:47.3756898+01:00  [INF] Executed DbCommand ("33"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE `UserClaims` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `UserId` int NOT NULL,
+    `ClaimType` longtext CHARACTER SET utf8mb4 NULL,
+    `ClaimValue` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_UserClaims` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_UserClaims_Users_UserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`) ON DELETE CASCADE
+) CHARACTER SET utf8mb4;" (0723d8ff)
+2022-01-13T16:39:47.4089857+01:00  [INF] Executed DbCommand ("33"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE `UserLogins` (
+    `LoginProvider` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `ProviderKey` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `ProviderDisplayName` longtext CHARACTER SET utf8mb4 NULL,
+    `UserId` int NOT NULL,
+    CONSTRAINT `PK_UserLogins` PRIMARY KEY (`LoginProvider`, `ProviderKey`),
+    CONSTRAINT `FK_UserLogins_Users_UserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`) ON DELETE CASCADE
+) CHARACTER SET utf8mb4;" (0723d8ff)
+2022-01-13T16:39:47.4396786+01:00  [INF] Executed DbCommand ("30"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE `UserRoles` (
+    `UserId` int NOT NULL,
+    `RoleId` int NOT NULL,
+    CONSTRAINT `PK_UserRoles` PRIMARY KEY (`UserId`, `RoleId`),
+    CONSTRAINT `FK_UserRoles_Roles_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `Roles` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_UserRoles_Users_UserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`) ON DELETE CASCADE
+) CHARACTER SET utf8mb4;" (0723d8ff)
+2022-01-13T16:39:47.4671521+01:00  [INF] Executed DbCommand ("27"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE `UserTokens` (
+    `UserId` int NOT NULL,
+    `LoginProvider` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `Name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    `Value` longtext CHARACTER SET utf8mb4 NULL,
+    CONSTRAINT `PK_UserTokens` PRIMARY KEY (`UserId`, `LoginProvider`, `Name`),
+    CONSTRAINT `FK_UserTokens_Users_UserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`) ON DELETE CASCADE
+) CHARACTER SET utf8mb4;" (0723d8ff)
+2022-01-13T16:39:47.5037708+01:00  [INF] Executed DbCommand ("36"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE `OrderItem` (
+    `ID` int NOT NULL AUTO_INCREMENT,
+    `OrderID` int NOT NULL,
+    `ProductID` int NOT NULL,
+    `Amount` int NOT NULL,
+    `Price` double NOT NULL,
+    CONSTRAINT `PK_OrderItem` PRIMARY KEY (`ID`),
+    CONSTRAINT `FK_OrderItem_Order_OrderID` FOREIGN KEY (`OrderID`) REFERENCES `Order` (`ID`) ON DELETE CASCADE,
+    CONSTRAINT `FK_OrderItem_Product_ProductID` FOREIGN KEY (`ProductID`) REFERENCES `Product` (`ID`) ON DELETE CASCADE
+) CHARACTER SET utf8mb4;" (0723d8ff)
+2022-01-13T16:39:47.5317202+01:00  [INF] Executed DbCommand ("28"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX `IX_Order_UserId` ON `Order` (`UserId`);" (0723d8ff)
+2022-01-13T16:39:47.5557526+01:00  [INF] Executed DbCommand ("24"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX `IX_OrderItem_OrderID` ON `OrderItem` (`OrderID`);" (0723d8ff)
+2022-01-13T16:39:47.5765315+01:00  [INF] Executed DbCommand ("21"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX `IX_OrderItem_ProductID` ON `OrderItem` (`ProductID`);" (0723d8ff)
+2022-01-13T16:39:47.6007647+01:00  [INF] Executed DbCommand ("24"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX `IX_RoleClaims_RoleId` ON `RoleClaims` (`RoleId`);" (0723d8ff)
+2022-01-13T16:39:47.6285653+01:00  [INF] Executed DbCommand ("28"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE UNIQUE INDEX `RoleNameIndex` ON `Roles` (`NormalizedName`);" (0723d8ff)
+2022-01-13T16:39:47.6495497+01:00  [INF] Executed DbCommand ("21"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX `IX_UserClaims_UserId` ON `UserClaims` (`UserId`);" (0723d8ff)
+2022-01-13T16:39:47.6705452+01:00  [INF] Executed DbCommand ("21"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX `IX_UserLogins_UserId` ON `UserLogins` (`UserId`);" (0723d8ff)
+2022-01-13T16:39:47.6916401+01:00  [INF] Executed DbCommand ("21"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX `IX_UserRoles_RoleId` ON `UserRoles` (`RoleId`);" (0723d8ff)
+2022-01-13T16:39:47.7316013+01:00  [INF] Executed DbCommand ("40"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX `EmailIndex` ON `Users` (`NormalizedEmail`);" (0723d8ff)
+2022-01-13T16:39:47.7656180+01:00  [INF] Executed DbCommand ("34"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE UNIQUE INDEX `UserNameIndex` ON `Users` (`NormalizedUserName`);" (0723d8ff)
+2022-01-13T16:39:47.7692865+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+VALUES ('20220113153930_MySql_1.0.2', '5.0.12');" (0723d8ff)
+2022-01-13T16:40:14.3963530+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T16:40:14.8680114+01:00  [INF] Executed DbCommand ("13"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T16:40:15.0839086+01:00  [INF] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T16:44:36.2818299+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T16:44:36.8383024+01:00  [INF] Executed DbCommand ("16"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T16:44:37.0821842+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T16:48:15.5384185+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T16:48:16.1776303+01:00  [INF] Executed DbCommand ("14"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T16:48:16.3859685+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T16:54:02.7078697+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T16:54:03.1762322+01:00  [INF] Executed DbCommand ("12"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T16:54:03.3813358+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T16:54:03.4385096+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T16:54:03.5938028+01:00  [INF] Executed DbCommand ("22"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T16:54:03.6638013+01:00  [INF] Executed DbCommand ("9"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T16:54:03.6848520+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedEmail_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2" (0723d8ff)
+2022-01-13T16:54:03.9075994+01:00  [INF] Executed DbCommand ("5"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (DbType = Boolean), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTimeOffset), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO `Users` (`AccessFailedCount`, `ConcurrencyStamp`, `Email`, `EmailConfirmed`, `FirstName`, `LastName`, `LockoutEnabled`, `LockoutEnd`, `NormalizedEmail`, `NormalizedUserName`, `PasswordHash`, `PhoneNumber`, `PhoneNumberConfirmed`, `SecurityStamp`, `TwoFactorEnabled`, `UserName`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15);
+SELECT `Id`
+FROM `Users`
+WHERE ROW_COUNT() = 1 AND `Id` = LAST_INSERT_ID();" (0723d8ff)
+2022-01-13T16:54:03.9812179+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedRoleName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedRoleName_0
+LIMIT 2" (0723d8ff)
+2022-01-13T16:54:03.9960170+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedRoleName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedRoleName_0
+LIMIT 2" (0723d8ff)
+2022-01-13T16:54:30.7416889+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T16:54:31.2265811+01:00  [INF] Executed DbCommand ("15"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T16:54:31.4266526+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T16:54:31.5985753+01:00  [INF] Executed DbCommand ("24"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T16:54:31.8066978+01:00  [INF] Executed DbCommand ("6"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (Size = 256), @p2='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO `Roles` (`ConcurrencyStamp`, `Name`, `NormalizedName`)
+VALUES (@p0, @p1, @p2);
+SELECT `Id`
+FROM `Roles`
+WHERE ROW_COUNT() = 1 AND `Id` = LAST_INSERT_ID();" (0723d8ff)
+2022-01-13T16:54:31.8662292+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T16:54:31.8944941+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (Size = 256), @p2='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO `Roles` (`ConcurrencyStamp`, `Name`, `NormalizedName`)
+VALUES (@p0, @p1, @p2);
+SELECT `Id`
+FROM `Roles`
+WHERE ROW_COUNT() = 1 AND `Id` = LAST_INSERT_ID();" (0723d8ff)
+2022-01-13T16:54:31.9116597+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T16:54:31.9209577+01:00  [INF] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (Size = 256), @p2='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO `Roles` (`ConcurrencyStamp`, `Name`, `NormalizedName`)
+VALUES (@p0, @p1, @p2);
+SELECT `Id`
+FROM `Roles`
+WHERE ROW_COUNT() = 1 AND `Id` = LAST_INSERT_ID();" (0723d8ff)
+2022-01-13T16:54:31.9768697+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T16:54:31.9958821+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T16:54:32.0537000+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T16:54:32.0913660+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T16:54:32.1106366+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedEmail_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2" (0723d8ff)
+2022-01-13T16:54:32.1527544+01:00  [INF] Executed DbCommand ("13"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (DbType = Boolean), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTimeOffset), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO `Users` (`AccessFailedCount`, `ConcurrencyStamp`, `Email`, `EmailConfirmed`, `FirstName`, `LastName`, `LockoutEnabled`, `LockoutEnd`, `NormalizedEmail`, `NormalizedUserName`, `PasswordHash`, `PhoneNumber`, `PhoneNumberConfirmed`, `SecurityStamp`, `TwoFactorEnabled`, `UserName`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15);
+SELECT `Id`
+FROM `Users`
+WHERE ROW_COUNT() = 1 AND `Id` = LAST_INSERT_ID();" (0723d8ff)
+2022-01-13T16:54:32.1786885+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedRoleName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedRoleName_0
+LIMIT 2" (0723d8ff)
+2022-01-13T16:54:32.2168253+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`UserId`, `u`.`RoleId`
+FROM `UserRoles` AS `u`
+WHERE (`u`.`UserId` = @__p_0) AND (`u`.`RoleId` = @__p_1)
+LIMIT 1" (0723d8ff)
+2022-01-13T16:54:32.2277884+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedRoleName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedRoleName_0
+LIMIT 2" (0723d8ff)
+2022-01-13T16:54:32.2484123+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T16:54:32.2540231+01:00  [INF] Executed DbCommand ("1"ms) [Parameters=["@__normalizedEmail_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2" (0723d8ff)
+2022-01-13T16:54:32.2764073+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO `UserRoles` (`RoleId`, `UserId`)
+VALUES (@p0, @p1);" (0723d8ff)
+2022-01-13T16:54:32.2824485+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@p16='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p17='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (DbType = Boolean), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTimeOffset), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE `Users` SET `AccessFailedCount` = @p0, `ConcurrencyStamp` = @p1, `Email` = @p2, `EmailConfirmed` = @p3, `FirstName` = @p4, `LastName` = @p5, `LockoutEnabled` = @p6, `LockoutEnd` = @p7, `NormalizedEmail` = @p8, `NormalizedUserName` = @p9, `PasswordHash` = @p10, `PhoneNumber` = @p11, `PhoneNumberConfirmed` = @p12, `SecurityStamp` = @p13, `TwoFactorEnabled` = @p14, `UserName` = @p15
+WHERE `Id` = @p16 AND `ConcurrencyStamp` = @p17;
+SELECT ROW_COUNT();" (0723d8ff)
+2022-01-13T16:54:32.2956793+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedRoleName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedRoleName_0
+LIMIT 2" (0723d8ff)
+2022-01-13T16:54:32.3013977+01:00  [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`UserId`, `u`.`RoleId`
+FROM `UserRoles` AS `u`
+WHERE (`u`.`UserId` = @__p_0) AND (`u`.`RoleId` = @__p_1)
+LIMIT 1" (0723d8ff)
+2022-01-13T16:54:32.3063843+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedRoleName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedRoleName_0
+LIMIT 2" (0723d8ff)
+2022-01-13T16:54:32.3111920+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T16:54:32.3182935+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedEmail_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2" (0723d8ff)
+2022-01-13T16:54:32.3260191+01:00  [INF] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO `UserRoles` (`RoleId`, `UserId`)
+VALUES (@p0, @p1);" (0723d8ff)
+2022-01-13T16:54:32.3278192+01:00  [INF] Executed DbCommand ("1"ms) [Parameters=["@p16='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p17='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (DbType = Boolean), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTimeOffset), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE `Users` SET `AccessFailedCount` = @p0, `ConcurrencyStamp` = @p1, `Email` = @p2, `EmailConfirmed` = @p3, `FirstName` = @p4, `LastName` = @p5, `LockoutEnabled` = @p6, `LockoutEnd` = @p7, `NormalizedEmail` = @p8, `NormalizedUserName` = @p9, `PasswordHash` = @p10, `PhoneNumber` = @p11, `PhoneNumberConfirmed` = @p12, `SecurityStamp` = @p13, `TwoFactorEnabled` = @p14, `UserName` = @p15
+WHERE `Id` = @p16 AND `ConcurrencyStamp` = @p17;
+SELECT ROW_COUNT();" (0723d8ff)
+2022-01-13T16:54:32.6333185+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-01-13T16:54:32.6410341+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-01-13T16:54:32.6411179+01:00  [INF] Content root path: "C:\Users\User\Desktop\Tatyrkova.Eshop.Web\Tatyrkova.Eshop.Web" (b5d60022)
+2022-01-13T16:54:32.6931626+01:00 80000012-0007-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T16:54:32.7459465+01:00 80000012-0007-ff00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T16:54:32.7685202+01:00 80000012-0007-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T16:54:32.7726420+01:00 80000012-0007-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T16:54:32.7804921+01:00 80000012-0007-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T16:54:32.7942275+01:00 80000012-0007-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T16:54:32.8362501+01:00 80000012-0007-ff00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T16:54:32.9694804+01:00 80000012-0007-ff00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 134.9204ms. (f66409e9)
+2022-01-13T16:54:32.9703809+01:00 80000012-0007-ff00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 201.383ms (afa2e885)
+2022-01-13T16:54:32.9710014+01:00 80000012-0007-ff00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T16:54:32.9900002+01:00 80000012-0007-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 300.4467ms (791a596a)
+2022-01-13T16:54:33.0596166+01:00 80000028-0000-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/img/Products/vqxov3kl.yir.jpg - - (ca22a1cb)
+2022-01-13T16:54:33.0727614+01:00 80000028-0000-ff00-b63f-84710c7967bb [INF] The file "/img/Products/vqxov3kl.yir.jpg" was not modified (f1f8d725)
+2022-01-13T16:54:33.0753261+01:00 80000028-0000-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/img/Products/vqxov3kl.yir.jpg - - - 304 - image/jpeg 15.4999ms (791a596a)
+2022-01-13T16:57:33.6785925+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T16:57:34.1926231+01:00  [INF] Executed DbCommand ("20"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T16:57:34.4023815+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T16:57:34.5564718+01:00  [INF] Executed DbCommand ("27"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T16:57:34.6118792+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T16:57:34.6444567+01:00  [INF] Executed DbCommand ("9"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T16:57:34.6491135+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T16:57:34.6640165+01:00  [INF] Executed DbCommand ("7"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T16:57:34.6642078+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T16:57:34.7136365+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T16:57:34.7494763+01:00  [INF] Executed DbCommand ("7"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T16:57:34.8097338+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T16:57:35.0866003+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-01-13T16:57:35.0867052+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-01-13T16:57:35.0867211+01:00  [INF] Content root path: "C:\Users\User\Desktop\Tatyrkova.Eshop.Web\Tatyrkova.Eshop.Web" (b5d60022)
+2022-01-13T16:57:35.1376630+01:00 8000000b-0004-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T16:57:35.1984379+01:00 8000000b-0004-fe00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T16:57:35.2239262+01:00 8000000b-0004-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T16:57:35.2280341+01:00 8000000b-0004-fe00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T16:57:35.2362399+01:00 8000000b-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T16:57:35.2494295+01:00 8000000b-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T16:57:35.2796543+01:00 8000000b-0004-fe00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T16:57:35.4269266+01:00 8000000b-0004-fe00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 148.0115ms. (f66409e9)
+2022-01-13T16:57:35.4282657+01:00 8000000b-0004-fe00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 203.754ms (afa2e885)
+2022-01-13T16:57:35.4289480+01:00 8000000b-0004-fe00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T16:57:35.4489806+01:00 8000000b-0004-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 315.2404ms (791a596a)
+2022-01-13T18:55:41.7420007+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T18:55:42.1536965+01:00  [INF] Executed DbCommand ("14"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T18:55:42.3171128+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T18:55:42.4486246+01:00  [INF] Executed DbCommand ("26"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T18:55:42.5133658+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T18:55:42.5404363+01:00  [INF] Executed DbCommand ("10"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T18:55:42.5449883+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T18:55:42.5561330+01:00  [INF] Executed DbCommand ("7"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T18:55:42.5563567+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T18:55:42.5961475+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T18:55:42.6189474+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T18:55:42.6687833+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T18:55:42.8874037+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-01-13T18:55:42.8874768+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-01-13T18:55:42.8874958+01:00  [INF] Content root path: "C:\Users\User\Desktop\Tatyrkova.Eshop.Web\Tatyrkova.Eshop.Web" (b5d60022)
+2022-01-13T18:55:42.9262082+01:00 80000005-0007-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T18:55:42.9764340+01:00 80000005-0007-fe00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T18:55:42.9944631+01:00 80000005-0007-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T18:55:43.0064791+01:00 80000005-0007-fe00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T18:55:43.0202470+01:00 80000005-0007-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T18:55:43.0282139+01:00 80000005-0007-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T18:55:43.0540195+01:00 80000005-0007-fe00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T18:55:43.1752309+01:00 80000005-0007-fe00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 119.5146ms. (f66409e9)
+2022-01-13T18:55:43.1765988+01:00 80000005-0007-fe00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 181.5989ms (afa2e885)
+2022-01-13T18:55:43.1771620+01:00 80000005-0007-fe00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T18:55:43.1955528+01:00 80000005-0007-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 271.2642ms (791a596a)
+2022-01-13T18:55:43.2537956+01:00 80000007-0007-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/img/Products/vqxov3kl.yir.jpg - - (ca22a1cb)
+2022-01-13T18:55:43.2600703+01:00 80000007-0007-fe00-b63f-84710c7967bb [INF] The file "/img/Products/vqxov3kl.yir.jpg" was not modified (f1f8d725)
+2022-01-13T18:55:43.2626685+01:00 80000007-0007-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/img/Products/vqxov3kl.yir.jpg - - - 304 - image/jpeg 8.8285ms (791a596a)
+2022-01-13T18:57:10.8851739+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T18:57:11.2800697+01:00  [INF] Executed DbCommand ("14"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T18:57:11.4539635+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T18:57:11.5867755+01:00  [INF] Executed DbCommand ("21"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T18:57:11.6317736+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T18:57:11.6551039+01:00  [INF] Executed DbCommand ("8"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T18:57:11.6597628+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T18:57:11.6672081+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T18:57:11.6673935+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T18:57:11.7167728+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T18:57:11.7345783+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T18:57:11.7862759+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T18:57:12.0249780+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-01-13T18:57:12.0251022+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-01-13T18:57:12.0251158+01:00  [INF] Content root path: "C:\Users\User\Desktop\Tatyrkova.Eshop.Web\Tatyrkova.Eshop.Web" (b5d60022)
+2022-01-13T18:57:12.0626848+01:00 80000026-0009-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T18:57:12.1085746+01:00 80000026-0009-ff00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T18:57:12.1282752+01:00 80000026-0009-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T18:57:12.1396353+01:00 80000026-0009-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T18:57:12.1620172+01:00 80000026-0009-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T18:57:12.1701734+01:00 80000026-0009-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T18:57:12.1953377+01:00 80000026-0009-ff00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T18:57:12.3039306+01:00 80000026-0009-ff00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 108.338ms. (f66409e9)
+2022-01-13T18:57:12.3050749+01:00 80000026-0009-ff00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 176.1297ms (afa2e885)
+2022-01-13T18:57:12.3055518+01:00 80000026-0009-ff00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T18:57:12.3241136+01:00 80000026-0009-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 263.0125ms (791a596a)
+2022-01-13T18:57:59.5470287+01:00 8000000c-0003-fc00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T18:57:59.5502111+01:00 8000000c-0003-fc00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T18:57:59.5554520+01:00 8000000c-0003-fc00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T18:57:59.5872249+01:00 8000000c-0003-fc00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T18:57:59.5890355+01:00 8000000c-0003-fc00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T18:57:59.5899370+01:00 8000000c-0003-fc00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T18:57:59.5903589+01:00 8000000c-0003-fc00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T18:57:59.6027869+01:00 8000000c-0003-fc00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 12.4515ms. (f66409e9)
+2022-01-13T18:57:59.6030124+01:00 8000000c-0003-fc00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 47.4456ms (afa2e885)
+2022-01-13T18:57:59.6030746+01:00 8000000c-0003-fc00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T18:57:59.6039419+01:00 8000000c-0003-fc00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 56.9404ms (791a596a)
+2022-01-13T18:58:01.4602603+01:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/Privacy - - (ca22a1cb)
+2022-01-13T18:58:01.4691081+01:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Privacy (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T18:58:01.4704506+01:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"Privacy\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Privacy()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T18:58:01.4713161+01:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Privacy". (c83d0e25)
+2022-01-13T18:58:01.4756752+01:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Executed ViewResult - view "Privacy" executed in 4.8131ms. (f66409e9)
+2022-01-13T18:58:01.4757331+01:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Privacy (Tatyrkova.Eshop.Web)" in 5.2441ms (afa2e885)
+2022-01-13T18:58:01.4757587+01:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Privacy (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T18:58:01.4766304+01:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/Privacy - - - 200 - text/html;+charset=utf-8 16.3496ms (791a596a)
+2022-01-13T18:58:03.8883529+01:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T18:58:03.8886783+01:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T18:58:03.8889524+01:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T18:58:03.8897517+01:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T18:58:03.8920922+01:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T18:58:03.8967265+01:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T18:58:03.8972618+01:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T18:58:03.9000520+01:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 2.8059ms. (f66409e9)
+2022-01-13T18:58:03.9002342+01:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 11.2229ms (afa2e885)
+2022-01-13T18:58:03.9002721+01:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T18:58:03.9012950+01:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 13.0210ms (791a596a)
+2022-01-13T18:58:05.5736766+01:00 80000011-0002-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T18:58:05.5740103+01:00 80000011-0002-fe00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T18:58:05.5741617+01:00 80000011-0002-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T18:58:05.5749443+01:00 80000011-0002-fe00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T18:58:05.5769971+01:00 80000011-0002-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T18:58:05.5795878+01:00 80000011-0002-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T18:58:05.5799966+01:00 80000011-0002-fe00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T18:58:05.5810860+01:00 80000011-0002-fe00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 1.1315ms. (f66409e9)
+2022-01-13T18:58:05.5811746+01:00 80000011-0002-fe00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 6.9882ms (afa2e885)
+2022-01-13T18:58:05.5812001+01:00 80000011-0002-fe00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T18:58:05.5819545+01:00 80000011-0002-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 8.3560ms (791a596a)
+2022-01-13T18:58:07.1698944+01:00 80000012-000b-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T18:58:07.1702371+01:00 80000012-000b-fe00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T18:58:07.1703843+01:00 80000012-000b-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T18:58:07.1709671+01:00 80000012-000b-fe00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T18:58:07.1725477+01:00 80000012-000b-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T18:58:07.1760639+01:00 80000012-000b-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T18:58:07.1764449+01:00 80000012-000b-fe00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T18:58:07.1777339+01:00 80000012-000b-fe00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 1.3525ms. (f66409e9)
+2022-01-13T18:58:07.1778039+01:00 80000012-000b-fe00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 7.3781ms (afa2e885)
+2022-01-13T18:58:07.1778329+01:00 80000012-000b-fe00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T18:58:07.1785438+01:00 80000012-000b-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 8.7022ms (791a596a)
+2022-01-13T19:10:54.2106370+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T19:10:54.5837359+01:00  [INF] Executed DbCommand ("11"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T19:10:54.7434508+01:00  [INF] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T19:10:54.8621248+01:00  [INF] Executed DbCommand ("21"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T19:10:54.9174059+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T19:10:54.9434909+01:00  [INF] Executed DbCommand ("8"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T19:10:54.9476716+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T19:10:54.9599627+01:00  [INF] Executed DbCommand ("7"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T19:10:54.9602071+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T19:10:55.0063751+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T19:10:55.0207001+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T19:10:55.0862992+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T19:10:55.2965409+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-01-13T19:10:55.2966217+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-01-13T19:10:55.2966338+01:00  [INF] Content root path: "C:\Users\User\Desktop\Tatyrkova.Eshop.Web\Tatyrkova.Eshop.Web" (b5d60022)
+2022-01-13T19:10:55.3358963+01:00 8000002d-0000-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T19:10:55.3794136+01:00 8000002d-0000-ff00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T19:10:55.3974775+01:00 8000002d-0000-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T19:10:55.4022161+01:00 8000002d-0000-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T19:10:55.4231455+01:00 8000002d-0000-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T19:10:55.4319704+01:00 8000002d-0000-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T19:10:55.4575340+01:00 8000002d-0000-ff00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T19:10:55.5726315+01:00 8000002d-0000-ff00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 114.8263ms. (f66409e9)
+2022-01-13T19:10:55.5734514+01:00 8000002d-0000-ff00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 175.5052ms (afa2e885)
+2022-01-13T19:10:55.5738005+01:00 8000002d-0000-ff00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T19:10:55.5887721+01:00 8000002d-0000-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 255.4797ms (791a596a)
+2022-01-13T19:22:21.2194344+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T19:22:21.6101937+01:00  [INF] Executed DbCommand ("12"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T19:22:21.7794333+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T19:22:21.8910644+01:00  [INF] Executed DbCommand ("16"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T19:22:21.9478256+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T19:22:21.9792681+01:00  [INF] Executed DbCommand ("15"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T19:22:21.9837708+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T19:22:21.9938686+01:00  [INF] Executed DbCommand ("4"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T19:22:21.9940898+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T19:22:22.0434702+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T19:22:22.0654755+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T19:22:22.1251673+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T19:22:22.3370708+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-01-13T19:22:22.3372123+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-01-13T19:22:22.3372507+01:00  [INF] Content root path: "C:\Users\User\Desktop\Tatyrkova.Eshop.Web\Tatyrkova.Eshop.Web" (b5d60022)
+2022-01-13T19:22:22.3787625+01:00 80000033-000a-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T19:22:22.4244137+01:00 80000033-000a-fd00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T19:22:22.4403130+01:00 80000033-000a-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T19:22:22.4441383+01:00 80000033-000a-fd00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T19:22:22.4662385+01:00 80000033-000a-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T19:22:22.4755135+01:00 80000033-000a-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T19:22:22.5011493+01:00 80000033-000a-fd00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T19:22:22.6345705+01:00 80000033-000a-fd00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 132.3638ms. (f66409e9)
+2022-01-13T19:22:22.6355144+01:00 80000033-000a-fd00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 194.7299ms (afa2e885)
+2022-01-13T19:22:22.6359535+01:00 80000033-000a-fd00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T19:22:22.6560921+01:00 80000033-000a-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 278.2758ms (791a596a)
+2022-01-13T19:22:22.7058899+01:00 8000001b-0008-fc00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/img/Products/vqxov3kl.yir.jpg - - (ca22a1cb)
+2022-01-13T19:22:22.7127292+01:00 8000001b-0008-fc00-b63f-84710c7967bb [INF] The file "/img/Products/vqxov3kl.yir.jpg" was not modified (f1f8d725)
+2022-01-13T19:22:22.7145285+01:00 8000001b-0008-fc00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/img/Products/vqxov3kl.yir.jpg - - - 304 - image/jpeg 8.6424ms (791a596a)
+2022-01-13T19:41:17.8759762+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T19:41:18.2531227+01:00  [INF] Executed DbCommand ("11"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T19:41:18.4104609+01:00  [INF] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T19:41:18.5329608+01:00  [INF] Executed DbCommand ("21"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T19:41:18.5785632+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T19:41:18.6032178+01:00  [INF] Executed DbCommand ("9"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T19:41:18.6085830+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T19:41:18.6161413+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T19:41:18.6164806+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T19:41:18.6595719+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T19:41:18.6771674+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T19:41:18.7540500+01:00  [INF] Executed DbCommand ("9"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T19:41:18.9737865+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-01-13T19:41:18.9738643+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-01-13T19:41:18.9738771+01:00  [INF] Content root path: "C:\Users\User\Desktop\Tatyrkova.Eshop.Web\Tatyrkova.Eshop.Web" (b5d60022)
+2022-01-13T19:41:19.0140225+01:00 80000035-000a-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T19:41:19.0683903+01:00 80000035-000a-fd00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T19:41:19.0847738+01:00 80000035-000a-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T19:41:19.0879782+01:00 80000035-000a-fd00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T19:41:19.0996196+01:00 80000035-000a-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T19:41:19.1084134+01:00 80000035-000a-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T19:41:19.1342250+01:00 80000035-000a-fd00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T19:41:19.2424255+01:00 80000035-000a-fd00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 107.5183ms. (f66409e9)
+2022-01-13T19:41:19.2434454+01:00 80000035-000a-fd00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 158.1612ms (afa2e885)
+2022-01-13T19:41:19.2439162+01:00 80000035-000a-fd00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T19:41:19.2612322+01:00 80000035-000a-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 249.7374ms (791a596a)
+2022-01-13T19:41:22.3869555+01:00 8000001d-0008-fc00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/ProductsPage - - (ca22a1cb)
+2022-01-13T19:41:22.3969557+01:00 8000001d-0008-fc00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/ProductsPage - - - 404 - - 9.9352ms (791a596a)
+2022-01-13T20:18:05.7274880+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:18:06.1063344+01:00  [INF] Executed DbCommand ("11"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T20:18:06.2699409+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:18:06.4159761+01:00  [INF] Executed DbCommand ("30"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:18:06.4676532+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:18:06.4938717+01:00  [INF] Executed DbCommand ("8"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:18:06.4976970+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:18:06.5048888+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:18:06.5050728+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:18:06.5445393+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T20:18:06.5625685+01:00  [INF] Executed DbCommand ("7"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:18:06.6091637+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:18:06.8223592+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-01-13T20:18:06.8224733+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-01-13T20:18:06.8224964+01:00  [INF] Content root path: "C:\Users\User\Desktop\Tatyrkova.Eshop.Web\Tatyrkova.Eshop.Web" (b5d60022)
+2022-01-13T20:18:06.8627155+01:00 80000029-0009-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T20:18:06.9107412+01:00 80000029-0009-ff00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:18:06.9265900+01:00 80000029-0009-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:18:06.9351910+01:00 80000029-0009-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:18:06.9450050+01:00 80000029-0009-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:18:06.9547795+01:00 80000029-0009-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:18:06.9796193+01:00 80000029-0009-ff00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T20:18:07.0933480+01:00 80000029-0009-ff00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 111.6872ms. (f66409e9)
+2022-01-13T20:18:07.0946420+01:00 80000029-0009-ff00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 167.5055ms (afa2e885)
+2022-01-13T20:18:07.0953028+01:00 80000029-0009-ff00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:18:07.1113519+01:00 80000029-0009-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 250.4959ms (791a596a)
+2022-01-13T20:18:07.1680691+01:00 8000001f-0008-fc00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/img/Products/vqxov3kl.yir.jpg - - (ca22a1cb)
+2022-01-13T20:18:07.1749376+01:00 8000001f-0008-fc00-b63f-84710c7967bb [INF] The file "/img/Products/vqxov3kl.yir.jpg" was not modified (f1f8d725)
+2022-01-13T20:18:07.1768482+01:00 8000001f-0008-fc00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/img/Products/vqxov3kl.yir.jpg - - - 304 - image/jpeg 8.7657ms (791a596a)
+2022-01-13T20:19:42.9550756+01:00 8000002b-0009-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/ProductsPage - - (ca22a1cb)
+2022-01-13T20:19:42.9819100+01:00 8000002b-0009-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/ProductsPage - - - 404 - - 26.7999ms (791a596a)
+2022-01-13T20:19:51.2299073+01:00 80000037-000a-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T20:19:51.2325336+01:00 80000037-000a-fd00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:19:51.2334925+01:00 80000037-000a-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:19:51.2660723+01:00 80000037-000a-fd00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:19:51.2679520+01:00 80000037-000a-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:19:51.2689668+01:00 80000037-000a-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:19:51.2693746+01:00 80000037-000a-fd00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T20:19:51.2721189+01:00 80000037-000a-fd00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 2.8458ms. (f66409e9)
+2022-01-13T20:19:51.2722288+01:00 80000037-000a-fd00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 38.6418ms (afa2e885)
+2022-01-13T20:19:51.2722805+01:00 80000037-000a-fd00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:19:51.2733201+01:00 80000037-000a-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 43.5103ms (791a596a)
+2022-01-13T20:19:52.5880888+01:00 80000039-000a-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/Privacy - - (ca22a1cb)
+2022-01-13T20:19:52.5919290+01:00 80000039-000a-fd00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Privacy (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:19:52.5948060+01:00 80000039-000a-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"Privacy\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Privacy()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:19:52.5967207+01:00 80000039-000a-fd00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Privacy". (c83d0e25)
+2022-01-13T20:19:52.5991863+01:00 80000039-000a-fd00-b63f-84710c7967bb [INF] Executed ViewResult - view "Privacy" executed in 3.1902ms. (f66409e9)
+2022-01-13T20:19:52.5992339+01:00 80000039-000a-fd00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Privacy (Tatyrkova.Eshop.Web)" in 4.3756ms (afa2e885)
+2022-01-13T20:19:52.5992558+01:00 80000039-000a-fd00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Privacy (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:19:52.6012337+01:00 80000039-000a-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/Privacy - - - 200 - text/html;+charset=utf-8 13.2494ms (791a596a)
+2022-01-13T20:19:55.3640654+01:00 8000001f-0006-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/ProductsPage - - (ca22a1cb)
+2022-01-13T20:19:55.3670697+01:00 8000001f-0006-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/ProductsPage - - - 404 - - 2.7902ms (791a596a)
+2022-01-13T20:27:51.1458227+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:27:51.6275495+01:00  [INF] Executed DbCommand ("12"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T20:27:51.7843846+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:27:51.9094288+01:00  [INF] Executed DbCommand ("17"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:27:51.9536302+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:27:51.9837414+01:00  [INF] Executed DbCommand ("8"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:27:51.9880364+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:27:51.9962695+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:27:51.9964618+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:27:52.0406806+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T20:27:52.0603066+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:27:52.1088227+01:00  [INF] Executed DbCommand ("4"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:27:52.3166255+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-01-13T20:27:52.3167711+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-01-13T20:27:52.3167847+01:00  [INF] Content root path: "C:\Users\User\Desktop\Tatyrkova.Eshop.Web\Tatyrkova.Eshop.Web" (b5d60022)
+2022-01-13T20:27:52.3539844+01:00 80000021-0008-fc00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T20:27:52.3975237+01:00 80000021-0008-fc00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:27:52.4123789+01:00 80000021-0008-fc00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:27:52.4159352+01:00 80000021-0008-fc00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:27:52.4344591+01:00 80000021-0008-fc00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:27:52.4457701+01:00 80000021-0008-fc00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:27:52.4752320+01:00 80000021-0008-fc00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T20:27:52.5856633+01:00 80000021-0008-fc00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 112.3062ms. (f66409e9)
+2022-01-13T20:27:52.5866397+01:00 80000021-0008-fc00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 173.7833ms (afa2e885)
+2022-01-13T20:27:52.5871304+01:00 80000021-0008-fc00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:27:52.6041159+01:00 80000021-0008-fc00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 251.8148ms (791a596a)
+2022-01-13T20:27:55.2585291+01:00 80000016-000b-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/ProductsPage - - (ca22a1cb)
+2022-01-13T20:27:55.2627072+01:00 80000016-000b-fe00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:27:55.2651680+01:00 80000016-000b-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"ProductsPage\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult ProductsPage()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:27:55.3009055+01:00 80000016-000b-fe00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:27:55.3027082+01:00 80000016-000b-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:27:55.3037216+01:00 80000016-000b-fe00-b63f-84710c7967bb [INF] Executing ViewResult, running view "ProductsPage". (c83d0e25)
+2022-01-13T20:27:55.3100427+01:00 80000016-000b-fe00-b63f-84710c7967bb [INF] Executed ViewResult - view "ProductsPage" executed in 6.8834ms. (f66409e9)
+2022-01-13T20:27:55.3101414+01:00 80000016-000b-fe00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)" in 44.8782ms (afa2e885)
+2022-01-13T20:27:55.3101936+01:00 80000016-000b-fe00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:27:55.3112538+01:00 80000016-000b-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/ProductsPage - - - 200 - text/html;+charset=utf-8 52.7092ms (791a596a)
+2022-01-13T20:27:57.7020947+01:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/Privacy - - (ca22a1cb)
+2022-01-13T20:27:57.7095754+01:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Privacy (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:27:57.7105391+01:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"Privacy\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Privacy()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:27:57.7112910+01:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Privacy". (c83d0e25)
+2022-01-13T20:27:57.7136362+01:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Executed ViewResult - view "Privacy" executed in 2.7824ms. (f66409e9)
+2022-01-13T20:27:57.7136779+01:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Privacy (Tatyrkova.Eshop.Web)" in 3.0981ms (afa2e885)
+2022-01-13T20:27:57.7137328+01:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Privacy (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:27:57.7146665+01:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/Privacy - - - 200 - text/html;+charset=utf-8 12.7601ms (791a596a)
+2022-01-13T20:27:59.6306957+01:00 80000015-0007-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/ProductsPage - - (ca22a1cb)
+2022-01-13T20:27:59.6310407+01:00 80000015-0007-ff00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:27:59.6312274+01:00 80000015-0007-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"ProductsPage\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult ProductsPage()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:27:59.6319825+01:00 80000015-0007-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:27:59.6359008+01:00 80000015-0007-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:27:59.6366489+01:00 80000015-0007-ff00-b63f-84710c7967bb [INF] Executing ViewResult, running view "ProductsPage". (c83d0e25)
+2022-01-13T20:27:59.6402746+01:00 80000015-0007-ff00-b63f-84710c7967bb [INF] Executed ViewResult - view "ProductsPage" executed in 3.6809ms. (f66409e9)
+2022-01-13T20:27:59.6403741+01:00 80000015-0007-ff00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)" in 9.0978ms (afa2e885)
+2022-01-13T20:27:59.6404028+01:00 80000015-0007-ff00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:27:59.6411192+01:00 80000015-0007-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/ProductsPage - - - 200 - text/html;+charset=utf-8 10.4931ms (791a596a)
+2022-01-13T20:29:14.4955390+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:29:14.8705784+01:00  [INF] Executed DbCommand ("12"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T20:29:15.0317906+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:29:15.1438511+01:00  [INF] Executed DbCommand ("18"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:29:15.1977038+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:29:15.2273579+01:00  [INF] Executed DbCommand ("9"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:29:15.2314216+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:29:15.2382409+01:00  [INF] Executed DbCommand ("1"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:29:15.2384389+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:29:15.2899919+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T20:29:15.3097700+01:00  [INF] Executed DbCommand ("4"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:29:15.3732298+01:00  [INF] Executed DbCommand ("8"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:29:15.5802882+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-01-13T20:29:15.5803634+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-01-13T20:29:15.5803759+01:00  [INF] Content root path: "C:\Users\User\Desktop\Tatyrkova.Eshop.Web\Tatyrkova.Eshop.Web" (b5d60022)
+2022-01-13T20:29:15.6199300+01:00 80000002-0005-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T20:29:15.6640823+01:00 80000002-0005-fd00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:29:15.6785137+01:00 80000002-0005-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:29:15.6821568+01:00 80000002-0005-fd00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:29:15.7027173+01:00 80000002-0005-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:29:15.7122438+01:00 80000002-0005-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:29:15.7383815+01:00 80000002-0005-fd00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T20:29:15.8556860+01:00 80000002-0005-fd00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 117.5066ms. (f66409e9)
+2022-01-13T20:29:15.8567295+01:00 80000002-0005-fd00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 177.7282ms (afa2e885)
+2022-01-13T20:29:15.8571323+01:00 80000002-0005-fd00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:29:15.8733560+01:00 80000002-0005-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 255.9831ms (791a596a)
+2022-01-13T20:29:18.5187185+01:00 80000013-0002-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/ProductsPage - - (ca22a1cb)
+2022-01-13T20:29:18.5219255+01:00 80000013-0002-fe00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:29:18.5237971+01:00 80000013-0002-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"ProductsPage\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult ProductsPage()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:29:18.5660530+01:00 80000013-0002-fe00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:29:18.5681942+01:00 80000013-0002-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:29:18.5691830+01:00 80000013-0002-fe00-b63f-84710c7967bb [INF] Executing ViewResult, running view "ProductsPage". (c83d0e25)
+2022-01-13T20:29:18.5751027+01:00 80000013-0002-fe00-b63f-84710c7967bb [INF] Executed ViewResult - view "ProductsPage" executed in 6.4499ms. (f66409e9)
+2022-01-13T20:29:18.5752055+01:00 80000013-0002-fe00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)" in 51.3276ms (afa2e885)
+2022-01-13T20:29:18.5752419+01:00 80000013-0002-fe00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:29:18.5760360+01:00 80000013-0002-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/ProductsPage - - - 200 - text/html;+charset=utf-8 57.3716ms (791a596a)
+2022-01-13T20:29:23.7244273+01:00 8000003b-000a-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T20:29:23.7294875+01:00 8000003b-000a-fd00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:29:23.7299157+01:00 8000003b-000a-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:29:23.7308903+01:00 8000003b-000a-fd00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:29:23.7330919+01:00 8000003b-000a-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:29:23.7339725+01:00 8000003b-000a-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:29:23.7341755+01:00 8000003b-000a-fd00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T20:29:23.7358050+01:00 8000003b-000a-fd00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 1.6445ms. (f66409e9)
+2022-01-13T20:29:23.7358495+01:00 8000003b-000a-fd00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 5.8522ms (afa2e885)
+2022-01-13T20:29:23.7358706+01:00 8000003b-000a-fd00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:29:23.7367701+01:00 8000003b-000a-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 12.6569ms (791a596a)
+2022-01-13T20:29:28.3705659+01:00 80000015-0002-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Product/Detail/1 - - (ca22a1cb)
+2022-01-13T20:29:28.3733267+01:00 80000015-0002-fe00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.ProductController.Detail (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:29:28.3849065+01:00 80000015-0002-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"Detail\", controller = \"Product\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Detail(Int32)" on controller "Tatyrkova.Eshop.Web.Controllers.ProductController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:29:28.3965058+01:00 80000015-0002-fe00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:29:28.4026687+01:00 80000015-0002-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=["@__ID_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`
+WHERE `p`.`ID` = @__ID_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:29:28.4034105+01:00 80000015-0002-fe00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Detail". (c83d0e25)
+2022-01-13T20:29:28.4124400+01:00 80000015-0002-fe00-b63f-84710c7967bb [INF] Executed ViewResult - view "Detail" executed in 9.5152ms. (f66409e9)
+2022-01-13T20:29:28.4125260+01:00 80000015-0002-fe00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.ProductController.Detail (Tatyrkova.Eshop.Web)" in 27.5522ms (afa2e885)
+2022-01-13T20:29:28.4125525+01:00 80000015-0002-fe00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.ProductController.Detail (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:29:28.4133397+01:00 80000015-0002-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Product/Detail/1 - - - 200 - text/html;+charset=utf-8 42.9177ms (791a596a)
+2022-01-13T20:29:43.4958674+01:00 80000022-0006-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/ProductsPage - - (ca22a1cb)
+2022-01-13T20:29:43.4977901+01:00 80000022-0006-fd00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:29:43.4979979+01:00 80000022-0006-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"ProductsPage\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult ProductsPage()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:29:43.4989015+01:00 80000022-0006-fd00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:29:43.5004079+01:00 80000022-0006-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:29:43.5009039+01:00 80000022-0006-fd00-b63f-84710c7967bb [INF] Executing ViewResult, running view "ProductsPage". (c83d0e25)
+2022-01-13T20:29:43.5027771+01:00 80000022-0006-fd00-b63f-84710c7967bb [INF] Executed ViewResult - view "ProductsPage" executed in 1.89ms. (f66409e9)
+2022-01-13T20:29:43.5028620+01:00 80000022-0006-fd00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)" in 4.8054ms (afa2e885)
+2022-01-13T20:29:43.5029254+01:00 80000022-0006-fd00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:29:43.5038612+01:00 80000022-0006-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/ProductsPage - - - 200 - text/html;+charset=utf-8 7.9302ms (791a596a)
+2022-01-13T20:30:22.2675095+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:30:22.6479296+01:00  [INF] Executed DbCommand ("12"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T20:30:22.8413461+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:30:22.9707050+01:00  [INF] Executed DbCommand ("23"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:30:23.0304437+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:30:23.0554035+01:00  [INF] Executed DbCommand ("9"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:30:23.0610707+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:30:23.0699736+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:30:23.0701759+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:30:23.1121030+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T20:30:23.1282458+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:30:23.1976740+01:00  [INF] Executed DbCommand ("4"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:30:23.4356356+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-01-13T20:30:23.4357145+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-01-13T20:30:23.4357283+01:00  [INF] Content root path: "C:\Users\User\Desktop\Tatyrkova.Eshop.Web\Tatyrkova.Eshop.Web" (b5d60022)
+2022-01-13T20:30:23.4744061+01:00 80000024-0008-fc00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T20:30:23.5178474+01:00 80000024-0008-fc00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:30:23.5353794+01:00 80000024-0008-fc00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:30:23.5386164+01:00 80000024-0008-fc00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:30:23.5494048+01:00 80000024-0008-fc00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:30:23.5577763+01:00 80000024-0008-fc00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:30:23.5899200+01:00 80000024-0008-fc00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T20:30:23.7004879+01:00 80000024-0008-fc00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 113.3612ms. (f66409e9)
+2022-01-13T20:30:23.7013625+01:00 80000024-0008-fc00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 165.5084ms (afa2e885)
+2022-01-13T20:30:23.7017407+01:00 80000024-0008-fc00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:30:23.7187992+01:00 80000024-0008-fc00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 245.9856ms (791a596a)
+2022-01-13T20:30:28.7598906+01:00 80000026-0008-fc00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/ProductsPage - - (ca22a1cb)
+2022-01-13T20:30:28.7637597+01:00 80000026-0008-fc00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:30:28.7648277+01:00 80000026-0008-fc00-b63f-84710c7967bb [INF] Route matched with "{action = \"ProductsPage\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult ProductsPage()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:30:28.8060904+01:00 80000026-0008-fc00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:30:28.8080874+01:00 80000026-0008-fc00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:30:28.8091004+01:00 80000026-0008-fc00-b63f-84710c7967bb [INF] Executing ViewResult, running view "ProductsPage". (c83d0e25)
+2022-01-13T20:30:28.8151631+01:00 80000026-0008-fc00-b63f-84710c7967bb [INF] Executed ViewResult - view "ProductsPage" executed in 6.5811ms. (f66409e9)
+2022-01-13T20:30:28.8152659+01:00 80000026-0008-fc00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)" in 50.391ms (afa2e885)
+2022-01-13T20:30:28.8153149+01:00 80000026-0008-fc00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:30:28.8163522+01:00 80000026-0008-fc00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/ProductsPage - - - 200 - text/html;+charset=utf-8 56.5466ms (791a596a)
+2022-01-13T20:37:57.9928310+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:37:58.4222302+01:00  [INF] Executed DbCommand ("13"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T20:37:58.6060696+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:37:58.7494284+01:00  [INF] Executed DbCommand ("25"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:37:58.8069291+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:37:58.8340328+01:00  [INF] Executed DbCommand ("8"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:37:58.8399450+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:37:58.8497716+01:00  [INF] Executed DbCommand ("4"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:37:58.8499696+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:37:58.8919775+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T20:37:58.9080246+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:37:58.9627436+01:00  [INF] Executed DbCommand ("7"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:37:59.1851305+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-01-13T20:37:59.1852309+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-01-13T20:37:59.1852439+01:00  [INF] Content root path: "C:\Users\User\Desktop\Tatyrkova.Eshop.Web\Tatyrkova.Eshop.Web" (b5d60022)
+2022-01-13T20:37:59.2290750+01:00 8000001b-0005-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T20:37:59.2767584+01:00 8000001b-0005-ff00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:37:59.2958968+01:00 8000001b-0005-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:37:59.3003355+01:00 8000001b-0005-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:37:59.3188740+01:00 8000001b-0005-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:37:59.3280715+01:00 8000001b-0005-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:37:59.3530059+01:00 8000001b-0005-ff00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T20:37:59.4791677+01:00 8000001b-0005-ff00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 125.8561ms. (f66409e9)
+2022-01-13T20:37:59.4798450+01:00 8000001b-0005-ff00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 183.4295ms (afa2e885)
+2022-01-13T20:37:59.4803261+01:00 8000001b-0005-ff00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:37:59.4936411+01:00 8000001b-0005-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 267.1918ms (791a596a)
+2022-01-13T20:38:02.4634938+01:00 8000000f-000a-fc00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/ProductsPage - - (ca22a1cb)
+2022-01-13T20:38:02.4681165+01:00 8000000f-000a-fc00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:38:02.4693676+01:00 8000000f-000a-fc00-b63f-84710c7967bb [INF] Route matched with "{action = \"ProductsPage\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult ProductsPage()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:38:02.5104308+01:00 8000000f-000a-fc00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:38:02.5124732+01:00 8000000f-000a-fc00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:38:02.5135314+01:00 8000000f-000a-fc00-b63f-84710c7967bb [INF] Executing ViewResult, running view "ProductsPage". (c83d0e25)
+2022-01-13T20:38:02.5209314+01:00 8000000f-000a-fc00-b63f-84710c7967bb [INF] Executed ViewResult - view "ProductsPage" executed in 7.9062ms. (f66409e9)
+2022-01-13T20:38:02.5210314+01:00 8000000f-000a-fc00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)" in 51.6169ms (afa2e885)
+2022-01-13T20:38:02.5210728+01:00 8000000f-000a-fc00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:38:02.5218483+01:00 8000000f-000a-fc00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/ProductsPage - - - 200 - text/html;+charset=utf-8 58.3458ms (791a596a)
+2022-01-13T20:39:58.9066425+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:39:59.2981641+01:00  [INF] Executed DbCommand ("16"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T20:39:59.4873086+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:39:59.6019828+01:00  [INF] Executed DbCommand ("19"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:39:59.6512131+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:39:59.6782088+01:00  [INF] Executed DbCommand ("9"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:39:59.6825819+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:39:59.6896673+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:39:59.6899740+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:39:59.7289937+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T20:39:59.7502986+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:39:59.8039778+01:00  [INF] Executed DbCommand ("9"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:40:00.0496385+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-01-13T20:40:00.0497231+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-01-13T20:40:00.0497365+01:00  [INF] Content root path: "C:\Users\User\Desktop\Tatyrkova.Eshop.Web\Tatyrkova.Eshop.Web" (b5d60022)
+2022-01-13T20:40:00.0931355+01:00 80000028-0008-fc00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T20:40:00.1371671+01:00 80000028-0008-fc00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:40:00.1551989+01:00 80000028-0008-fc00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:40:00.1596886+01:00 80000028-0008-fc00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:40:00.1733025+01:00 80000028-0008-fc00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:40:00.1813688+01:00 80000028-0008-fc00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:40:00.2056775+01:00 80000028-0008-fc00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T20:40:00.3231133+01:00 80000028-0008-fc00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 117.4956ms. (f66409e9)
+2022-01-13T20:40:00.3253428+01:00 80000028-0008-fc00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 168.7241ms (afa2e885)
+2022-01-13T20:40:00.3260546+01:00 80000028-0008-fc00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:40:00.3418639+01:00 80000028-0008-fc00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 251.1391ms (791a596a)
+2022-01-13T20:40:29.9671695+01:00 8000002a-0008-fc00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/ProductsPage - - (ca22a1cb)
+2022-01-13T20:40:29.9722563+01:00 8000002a-0008-fc00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:40:29.9779580+01:00 8000002a-0008-fc00-b63f-84710c7967bb [INF] Route matched with "{action = \"ProductsPage\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult ProductsPage()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:40:30.0158927+01:00 8000002a-0008-fc00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:40:30.0179129+01:00 8000002a-0008-fc00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:40:30.0189513+01:00 8000002a-0008-fc00-b63f-84710c7967bb [INF] Executing ViewResult, running view "ProductsPage". (c83d0e25)
+2022-01-13T20:40:30.0249783+01:00 8000002a-0008-fc00-b63f-84710c7967bb [INF] Executed ViewResult - view "ProductsPage" executed in 6.5553ms. (f66409e9)
+2022-01-13T20:40:30.0250777+01:00 8000002a-0008-fc00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)" in 46.8606ms (afa2e885)
+2022-01-13T20:40:30.0251124+01:00 8000002a-0008-fc00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:40:30.0261025+01:00 8000002a-0008-fc00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/ProductsPage - - - 200 - text/html;+charset=utf-8 59.0197ms (791a596a)
+2022-01-13T20:46:57.3465515+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:46:57.7113895+01:00  [INF] Executed DbCommand ("12"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T20:46:57.8730325+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:46:57.9975495+01:00  [INF] Executed DbCommand ("17"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:46:58.0429461+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:46:58.0716970+01:00  [INF] Executed DbCommand ("10"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:46:58.0777545+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:46:58.0889987+01:00  [INF] Executed DbCommand ("4"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:46:58.0892394+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:46:58.1544454+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T20:46:58.1837951+01:00  [INF] Executed DbCommand ("13"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:46:58.2331726+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:46:58.4376488+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-01-13T20:46:58.4377232+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-01-13T20:46:58.4377429+01:00  [INF] Content root path: "C:\Users\User\Desktop\Tatyrkova.Eshop.Web\Tatyrkova.Eshop.Web" (b5d60022)
+2022-01-13T20:46:58.4750522+01:00 8000003e-000a-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T20:46:58.5157971+01:00 8000003e-000a-fd00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:46:58.5307212+01:00 8000003e-000a-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:46:58.5363499+01:00 8000003e-000a-fd00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:46:58.5541246+01:00 8000003e-000a-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:46:58.5624123+01:00 8000003e-000a-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:46:58.5898165+01:00 8000003e-000a-fd00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T20:46:58.7016196+01:00 8000003e-000a-fd00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 111.5884ms. (f66409e9)
+2022-01-13T20:46:58.7024153+01:00 8000003e-000a-fd00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 171.1404ms (afa2e885)
+2022-01-13T20:46:58.7027738+01:00 8000003e-000a-fd00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:46:58.7186666+01:00 8000003e-000a-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 245.7378ms (791a596a)
+2022-01-13T20:46:58.7738789+01:00 80000014-0004-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/img/Products/vqxov3kl.yir.jpg - - (ca22a1cb)
+2022-01-13T20:46:58.7806168+01:00 80000014-0004-fe00-b63f-84710c7967bb [INF] The file "/img/Products/vqxov3kl.yir.jpg" was not modified (f1f8d725)
+2022-01-13T20:46:58.7829714+01:00 80000014-0004-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/img/Products/vqxov3kl.yir.jpg - - - 304 - image/jpeg 9.0612ms (791a596a)
+2022-01-13T20:47:01.9017348+01:00 8000001c-0006-fc00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/ProductsPage - - (ca22a1cb)
+2022-01-13T20:47:01.9077042+01:00 8000001c-0006-fc00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:47:01.9101548+01:00 8000001c-0006-fc00-b63f-84710c7967bb [INF] Route matched with "{action = \"ProductsPage\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult ProductsPage()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:47:01.9613653+01:00 8000001c-0006-fc00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:47:01.9631763+01:00 8000001c-0006-fc00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:47:01.9641473+01:00 8000001c-0006-fc00-b63f-84710c7967bb [INF] Executing ViewResult, running view "ProductsPage". (c83d0e25)
+2022-01-13T20:47:01.9702419+01:00 8000001c-0006-fc00-b63f-84710c7967bb [INF] Executed ViewResult - view "ProductsPage" executed in 6.5954ms. (f66409e9)
+2022-01-13T20:47:01.9704363+01:00 8000001c-0006-fc00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)" in 60.1824ms (afa2e885)
+2022-01-13T20:47:01.9705830+01:00 8000001c-0006-fc00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:47:01.9714671+01:00 8000001c-0006-fc00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/ProductsPage - - - 200 - text/html;+charset=utf-8 69.8115ms (791a596a)
+2022-01-13T20:59:49.6057739+01:00  [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:59:49.9743987+01:00  [INF] Executed DbCommand ("13"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'Tatyrkova.Eshop'" (0723d8ff)
+2022-01-13T20:59:50.1414878+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:59:50.2754060+01:00  [INF] Executed DbCommand ("22"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:59:50.3214379+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:59:50.3444072+01:00  [INF] Executed DbCommand ("8"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:59:50.3488633+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:59:50.3632407+01:00  [INF] Executed DbCommand ("6"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `r`.`Id`, `r`.`ConcurrencyStamp`, `r`.`Name`, `r`.`NormalizedName`
+FROM `Roles` AS `r`
+WHERE `r`.`NormalizedName` = @__normalizedName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:59:50.3671872+01:00  [WRN] Role null validation failed: "DuplicateRoleName". (60d773c7)
+2022-01-13T20:59:50.4249170+01:00  [INF] User profile is available. Using '"C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2022-01-13T20:59:50.4437239+01:00  [INF] Executed DbCommand ("3"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:59:50.4928756+01:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`Id`, `u`.`AccessFailedCount`, `u`.`ConcurrencyStamp`, `u`.`Email`, `u`.`EmailConfirmed`, `u`.`FirstName`, `u`.`LastName`, `u`.`LockoutEnabled`, `u`.`LockoutEnd`, `u`.`NormalizedEmail`, `u`.`NormalizedUserName`, `u`.`PasswordHash`, `u`.`PhoneNumber`, `u`.`PhoneNumberConfirmed`, `u`.`SecurityStamp`, `u`.`TwoFactorEnabled`, `u`.`UserName`
+FROM `Users` AS `u`
+WHERE `u`.`NormalizedUserName` = @__normalizedUserName_0
+LIMIT 1" (0723d8ff)
+2022-01-13T20:59:50.7396220+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-01-13T20:59:50.7396983+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-01-13T20:59:50.7397107+01:00  [INF] Content root path: "C:\Users\User\Desktop\Tatyrkova.Eshop.Web\Tatyrkova.Eshop.Web" (b5d60022)
+2022-01-13T20:59:50.7797949+01:00 80000019-0000-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T20:59:50.8276621+01:00 80000019-0000-fe00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T20:59:50.8460137+01:00 80000019-0000-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T20:59:50.8495452+01:00 80000019-0000-fe00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T20:59:50.8616106+01:00 80000019-0000-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T20:59:50.8721333+01:00 80000019-0000-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T20:59:50.8966078+01:00 80000019-0000-fe00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T20:59:51.0108627+01:00 80000019-0000-fe00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 113.8053ms. (f66409e9)
+2022-01-13T20:59:51.0118654+01:00 80000019-0000-fe00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 165.2386ms (afa2e885)
+2022-01-13T20:59:51.0122688+01:00 80000019-0000-fe00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T20:59:51.0297951+01:00 80000019-0000-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 251.9797ms (791a596a)
+2022-01-13T21:08:34.6512976+01:00 80000032-0000-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/ProductsPage - - (ca22a1cb)
+2022-01-13T21:08:34.6826968+01:00 80000032-0000-ff00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T21:08:34.6885598+01:00 80000032-0000-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"ProductsPage\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult ProductsPage()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T21:08:34.7230863+01:00 80000032-0000-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T21:08:34.7300515+01:00 80000032-0000-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T21:08:34.7318404+01:00 80000032-0000-ff00-b63f-84710c7967bb [INF] Executing ViewResult, running view "ProductsPage". (c83d0e25)
+2022-01-13T21:08:34.7396754+01:00 80000032-0000-ff00-b63f-84710c7967bb [INF] Executed ViewResult - view "ProductsPage" executed in 8.7241ms. (f66409e9)
+2022-01-13T21:08:34.7397946+01:00 80000032-0000-ff00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)" in 51.1731ms (afa2e885)
+2022-01-13T21:08:34.7398528+01:00 80000032-0000-ff00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T21:08:34.7408670+01:00 80000032-0000-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/ProductsPage - - - 200 - text/html;+charset=utf-8 89.5782ms (791a596a)
+2022-01-13T21:08:45.9575105+01:00 80000018-000b-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T21:08:45.9611825+01:00 80000018-000b-fe00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T21:08:45.9615281+01:00 80000018-000b-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T21:08:45.9620528+01:00 80000018-000b-fe00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T21:08:45.9638704+01:00 80000018-000b-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T21:08:45.9654915+01:00 80000018-000b-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T21:08:45.9659997+01:00 80000018-000b-fe00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T21:08:45.9677927+01:00 80000018-000b-fe00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 1.8309ms. (f66409e9)
+2022-01-13T21:08:45.9680173+01:00 80000018-000b-fe00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 6.4266ms (afa2e885)
+2022-01-13T21:08:45.9681220+01:00 80000018-000b-fe00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T21:08:45.9697141+01:00 80000018-000b-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 12.4914ms (791a596a)
+2022-01-13T21:08:51.1417994+01:00 8000001e-0006-fc00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/ - - (ca22a1cb)
+2022-01-13T21:08:51.1421651+01:00 8000001e-0006-fc00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T21:08:51.1422645+01:00 8000001e-0006-fc00-b63f-84710c7967bb [INF] Route matched with "{action = \"Index\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Index()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T21:08:51.1431640+01:00 8000001e-0006-fc00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T21:08:51.1447458+01:00 8000001e-0006-fc00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `c`.`ID`, `c`.`ImageAlt`, `c`.`ImageSource`
+FROM `CarouselItem` AS `c`" (0723d8ff)
+2022-01-13T21:08:51.1476876+01:00 8000001e-0006-fc00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T21:08:51.1484107+01:00 8000001e-0006-fc00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Index". (c83d0e25)
+2022-01-13T21:08:51.1499204+01:00 8000001e-0006-fc00-b63f-84710c7967bb [INF] Executed ViewResult - view "Index" executed in 1.53ms. (f66409e9)
+2022-01-13T21:08:51.1499669+01:00 8000001e-0006-fc00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)" in 7.6688ms (afa2e885)
+2022-01-13T21:08:51.1500565+01:00 8000001e-0006-fc00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Index (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T21:08:51.1509871+01:00 8000001e-0006-fc00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/ - - - 200 - text/html;+charset=utf-8 9.2683ms (791a596a)
+2022-01-13T21:08:56.4324546+01:00 80000016-0004-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/Privacy - - (ca22a1cb)
+2022-01-13T21:08:56.4353875+01:00 80000016-0004-fe00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Privacy (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T21:08:56.4373022+01:00 80000016-0004-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"Privacy\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Privacy()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T21:08:56.4389833+01:00 80000016-0004-fe00-b63f-84710c7967bb [INF] Executing ViewResult, running view "Privacy". (c83d0e25)
+2022-01-13T21:08:56.4424775+01:00 80000016-0004-fe00-b63f-84710c7967bb [INF] Executed ViewResult - view "Privacy" executed in 4.036ms. (f66409e9)
+2022-01-13T21:08:56.4427749+01:00 80000016-0004-fe00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.Privacy (Tatyrkova.Eshop.Web)" in 5.2406ms (afa2e885)
+2022-01-13T21:08:56.4428329+01:00 80000016-0004-fe00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.Privacy (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T21:08:56.4435615+01:00 80000016-0004-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/Privacy - - - 200 - text/html;+charset=utf-8 11.2901ms (791a596a)
+2022-01-13T21:08:59.1055510+01:00 80000018-0002-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44368/Home/ProductsPage - - (ca22a1cb)
+2022-01-13T21:08:59.1059526+01:00 80000018-0002-fe00-b63f-84710c7967bb [INF] Executing endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (500cc934)
+2022-01-13T21:08:59.1061168+01:00 80000018-0002-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"ProductsPage\", controller = \"Home\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult ProductsPage()" on controller "Tatyrkova.Eshop.Web.Controllers.HomeController" ("Tatyrkova.Eshop.Web"). (122b2fdf)
+2022-01-13T21:08:59.1066411+01:00 80000018-0002-fe00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.12" initialized '"EshopDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "ServerVersion 8.0.26-mysql " (9958f5bb)
+2022-01-13T21:08:59.1086166+01:00 80000018-0002-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`ID`, `p`.`Category`, `p`.`Description`, `p`.`ImageAlt`, `p`.`ImageSource`, `p`.`Name`, `p`.`Price`
+FROM `Product` AS `p`" (0723d8ff)
+2022-01-13T21:08:59.1090253+01:00 80000018-0002-fe00-b63f-84710c7967bb [INF] Executing ViewResult, running view "ProductsPage". (c83d0e25)
+2022-01-13T21:08:59.1102541+01:00 80000018-0002-fe00-b63f-84710c7967bb [INF] Executed ViewResult - view "ProductsPage" executed in 1.2492ms. (f66409e9)
+2022-01-13T21:08:59.1103369+01:00 80000018-0002-fe00-b63f-84710c7967bb [INF] Executed action "Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)" in 4.1712ms (afa2e885)
+2022-01-13T21:08:59.1103667+01:00 80000018-0002-fe00-b63f-84710c7967bb [INF] Executed endpoint '"Tatyrkova.Eshop.Web.Controllers.HomeController.ProductsPage (Tatyrkova.Eshop.Web)"' (99874f2b)
+2022-01-13T21:08:59.1110789+01:00 80000018-0002-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44368/Home/ProductsPage - - - 200 - text/html;+charset=utf-8 5.4722ms (791a596a)

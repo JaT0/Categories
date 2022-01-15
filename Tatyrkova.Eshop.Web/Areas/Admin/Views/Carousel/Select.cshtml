@@ -1,0 +1,50 @@
+﻿@model IList<CarouselItem>
+@{
+    ViewData["Title"] = "Carousel Items";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>This page shows all Carousel Items for admin.</p>
+
+<a class="btn btn-primary" asp-action="Create" style="margin-bottom:10px">Create new Carousel Item</a>
+
+@{
+    @if (Model != null && Model.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Image Source</th>
+                    <th scope="col">Image Alt</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    for (int i = 0; i < Model.Count; ++i)
+                    {
+                        <tr>
+                            <th scope="row">@Model[i].ID</th>
+                            <td>@Model[i].ImageSource</td>
+                            <td>@Model[i].ImageAlt</td>
+                            <td><a class="btn btn-info" asp-action="Edit" asp-route-ID="@Model[i].ID">Edit</a></td>
+                            <td><a class="btn btn-danger" asp-action="Delete" asp-route-ID="@Model[i].ID" onclick="return ConfirmDelete();">Delete</a></td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Carousel is empty</p>
+    }
+
+}
+@section Scripts {
+    <script src="~/js/alerts.js"></script>
+}
+

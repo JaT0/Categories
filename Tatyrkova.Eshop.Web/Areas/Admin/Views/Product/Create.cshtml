@@ -1,0 +1,11 @@
+﻿@model Product
+@using Tatyrkova.Eshop.Web.Areas.Admin.Controllers
+@{
+    ViewData["Title"] = "Products";
+}
+<h1>@ViewData["Title"]</h1>
+
+@{ 
+    ViewBag.Action = nameof(ProductController.Create);
+}
+<partial name="CreateEditForm" model="Model">

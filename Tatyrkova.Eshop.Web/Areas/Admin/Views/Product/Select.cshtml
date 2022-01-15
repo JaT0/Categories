@@ -1,0 +1,58 @@
+﻿@model IList<Product>
+@{
+    ViewData["Title"] = "Products";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>This page shows all Products for admin.</p>
+
+<a class="btn btn-primary" asp-action="Create" style="margin-bottom:10px">Create new Product</a>
+
+@{
+    @if (Model != null && Model.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">ImageSource</th>
+                    <th scope="col">ImageAlt</th>
+                    <th scope="col">Product Category</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    for (int i = 0; i < Model.Count; ++i)
+                    {
+                                <tr>
+                                    <th scope="row">@Model[i].ID</th>
+                                    <td>@Model[i].Name</td>
+                                    <td>@Model[i].Description</td>
+                                    <td>@Model[i].Price</td>
+                                    <td>@Model[i].ImageSource</td>
+                                    <td>@Model[i].ImageAlt</td>
+                                    <td>@Model[i].Category</td>
+                                    <td><a class="btn btn-info" asp-action="Edit" asp-route-ID="@Model[i].ID">Edit</a></td>
+                                    <td><a class="btn btn-danger" asp-action="Delete" asp-route-ID="@Model[i].ID" onclick="return ConfirmDelete();">Delete</a></td>
+                                </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Carousel is empty</p>
+    }
+
+}
+@section Scripts {
+    <script src="~/js/alerts.js"></script>
+}
+
